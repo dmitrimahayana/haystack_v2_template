@@ -1,14 +1,25 @@
-# This is a sample Python script.
+from utility.load_data import *
+from doc_store.pgvector import *
+from processing.embedding import *
+from processing.query import *
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+TABLE_NAME = "digimon_documents"
 
 
-# Press the green button in the gutter to run the script.
+def perform_indexing():
+    list_doc = load_data()
+    doc_store = load_doc_store(TABLE_NAME)
+    run_embedding(list_doc, doc_store)
+
+
+def perform_similarity_search(query_string):
+    doc_store = load_doc_store(TABLE_NAME)
+    results = run_query(query_string, 10, doc_store)
+    for result in results:
+        print(result.content, result.score)
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    print("demo haystack v2")
+    # perform_indexing()
+    perform_similarity_search("agumon")
