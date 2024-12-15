@@ -14,7 +14,13 @@ def perform_indexing():
 
 def perform_similarity_search(query_string):
     doc_store = load_doc_store(TABLE_NAME)
-    results = run_query(query_string, 10, doc_store)
+    meta_filters = {
+        "operator": "AND",
+        "conditions": [
+            {"field": "meta.created_at", "operator": ">=", "value": "2024-12-15"},
+        ],
+    }
+    results = run_query(query_string, meta_filters, 10, doc_store)
     for result in results:
         print(result.content, result.score)
 
