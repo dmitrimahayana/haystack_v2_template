@@ -3,16 +3,16 @@ from haystack.components.builders import ChatPromptBuilder
 from haystack.components.builders.prompt_builder import PromptBuilder
 from haystack_integrations.components.generators.ollama import OllamaChatGenerator, OllamaGenerator
 from haystack.components.embedders import SentenceTransformersTextEmbedder
-from haystack.dataclasses import ChatMessage
+# from haystack.dataclasses import ChatMessage
 from haystack import Pipeline
 
 # no parameter init, we don't use any runtime template variables
 prompt_builder = ChatPromptBuilder()
-chat_generator = OllamaChatGenerator(model="mistral:latest",
-                                     url="http://localhost:11434",
-                                     generation_kwargs={
-                                         "temperature": 0.9,
-                                     })
+# chat_generator = OllamaChatGenerator(model="mistral:latest",
+#                                      url="http://localhost:11434",
+#                                      generation_kwargs={
+#                                          "temperature": 0.9,
+#                                      })
 text_generator = OllamaGenerator(model="mistral:latest",
                                  url="http://localhost:11434")
 
